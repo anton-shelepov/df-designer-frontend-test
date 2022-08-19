@@ -1,4 +1,6 @@
 .graph {
     display: flex;
-    margin-top: 50px;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: calc(100vh - var(--header-height));
 }

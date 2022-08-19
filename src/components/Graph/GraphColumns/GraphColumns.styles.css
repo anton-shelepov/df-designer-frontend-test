@@ -1,0 +1,14 @@
+.graph__columns {
+    display: flex;
+}
+
+.graph__columns-item {
+    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.graph__columns-item:last-child {
+    margin-right: 0;
+}

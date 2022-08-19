@@ -1,0 +1,28 @@
+header {
+    height: 50px;
+    width: 100%;
+    background-color: var(--color-background-primary);
+    --webkit-box-shadow: var(--box-shadow-primary);
+    -moz-box-shadow: var(--box-shadow-primary);
+    box-shadow: var(--box-shadow-primary);
+}
+
+header > .header-wrapper {
+    display: flex;
+    align-items: center;
+    padding: var(--safe-padding);
+    max-width: var(--global-wrapper);
+    height: 100%;
+    margin: 0 auto;
+}
+
+.header-wrapper__logo {
+    height: 40px;
+    width: 40px;
+    border-radius: 10%;
+    margin-right: 50px;
+}
+
+.header-wrapper__content {
+    flex: 1;
+}

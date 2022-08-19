@@ -1,8 +1,9 @@
 .node {
-    padding: 25px 35px;
+    padding: 15px 35px;
     background-color: rgba(255, 124, 146, 0.034);
     margin-bottom: 50px;
-    border: 2px solid rgb(255, 124, 146);
+    border-top: 4px solid var(--color-blue);
+    background-color: #ffffff;
     border-radius: 5px;
     text-align: center;
 
@@ -12,6 +13,10 @@
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently */
+
+    --webkit-box-shadow: var(--box-shadow-primary);
+    -moz-box-shadow: var(--box-shadow-primary);
+    box-shadow: var(--box-shadow-primary);
 }
 
 .node:last-child {
@@ -19,9 +24,7 @@
 }
 
 .node__title {
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    color: rgb(252, 109, 133);
     white-space: nowrap;
+    font-weight: 500;
+    font-size: 15px;
 }

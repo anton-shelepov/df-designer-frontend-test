@@ -1,0 +1,13 @@
+.edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.edge > line {
+    stroke: var(--color-edge);
+    stroke-width: 1.5;
+}

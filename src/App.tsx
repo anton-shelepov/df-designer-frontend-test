@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { fetchGraph } from "./api";
 import "./App.css";
-
-const fetchGraphs = async () => {
-    const response = await fetch("/api/graphs/1");
-    return response.json();
-};
+import Dropdown from "./components/Dropdown/Dropdown";
+import Graph from "./models/graph";
+import useGraphsList from "./utils/hooks/useGraphsList";
 
 function App() {
-    const [graphs, setGraphs] = useState([]);
+    const [selectedGraph, setSelectedGraph] = useState<Graph>({ edges: [], nodes: [] });
 
-    useEffect(() => {
-        fetchGraphs().then((graphs) => setGraphs(graphs));
-    }, []);
+    const { graphs } = useGraphsList();
 
-    return <div className="app"></div>;
+    const onGraphSelect = (id: string) => {
+        fetchGraph(id).then((graph) => setSelectedGraph(graph));
+    };
+
+    return (
+        <div className="app">
+            <Dropdown options={graphs} onChange={onGraphSelect} />
+        </div>
+    );
 }
 
 export default App;

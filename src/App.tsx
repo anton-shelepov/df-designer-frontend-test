@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+const fetchGraphs = async () => {
+    const response = await fetch("/api/graphs/1");
+    return response.json();
+};
 
-  return <div>Write your app here.</div>;
+function App() {
+    const [graphs, setGraphs] = useState([]);
+
+    useEffect(() => {
+        fetchGraphs().then((graphs) => setGraphs(graphs));
+    }, []);
+
+    return <div className="app"></div>;
 }
 
 export default App;

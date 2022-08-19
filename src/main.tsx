@@ -1,10 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import { createRoot } from "react-dom/client";
 import App from "./App";
+import "./index.css";
 
-if (process.env.NODE_ENV === "development") {
-  import("./mocks/browser.js").then(({ worker }) => worker.start());
+async function bootstrapApp() {
+    if (process.env.NODE_ENV === "development") {
+        const { worker } = await import("./mocks/browser");
+        worker.start();
+    }
+    const root = createRoot(document.getElementById("root")!);
+    root.render(<App />);
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));
+bootstrapApp();

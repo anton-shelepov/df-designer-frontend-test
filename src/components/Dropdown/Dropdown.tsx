@@ -1,5 +1,5 @@
 import { ReactEventHandler, useState } from "react";
-// import "./Dropdown.styles.css";
+import "./Dropdown.styles.css";
 
 interface IProps {
     options: string[] | number[];

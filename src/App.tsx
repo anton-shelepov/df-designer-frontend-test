@@ -1,22 +1,20 @@
-import { useState } from "react";
-import { fetchGraph } from "./api";
-import "./App.css";
+import "./App.styles.css";
 import Dropdown from "./components/Dropdown/Dropdown";
-import Graph from "./models/graph";
+import Graph from "./components/Graph/Graph";
+import useGraph from "./utils/hooks/useGraph";
 import useGraphsList from "./utils/hooks/useGraphsList";
 
 function App() {
-    const [selectedGraph, setSelectedGraph] = useState<Graph>({ edges: [], nodes: [] });
-
     const { graphs } = useGraphsList();
-
-    const onGraphSelect = (id: string) => {
-        fetchGraph(id).then((graph) => setSelectedGraph(graph));
-    };
-
+    const [selectedGraph, onGraphSelect] = useGraph();
     return (
-        <div className="app">
+        <div className="app-wrapper">
             <Dropdown options={graphs} onChange={onGraphSelect} />
+            {selectedGraph.nodes.length === 0 ? (
+                <p>Please choose graph</p>
+            ) : (
+                <Graph graph={selectedGraph} />
+            )}
         </div>
     );
 }

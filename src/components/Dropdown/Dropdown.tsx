@@ -1,5 +1,5 @@
 import { ReactEventHandler, useState } from "react";
-import "./Dropdown.styles.css";
+import s from "./Dropdown.module.css";
 
 interface IProps {
     options: string[] | number[];
@@ -13,9 +13,9 @@ const Dropdown: React.FC<IProps> = ({ options, onChange }) => {
         setSelectedOption(value);
         onChange(value);
     };
-
+    console.log(selectedOption);
     return (
-        <select className="dropdown" value={selectedOption} onChange={onHandleChange}>
+        <select className={s.dropdown} value={selectedOption} onChange={onHandleChange}>
             {options.map((optionValue) => (
                 <option key={optionValue} value={optionValue}>
                     {optionValue}

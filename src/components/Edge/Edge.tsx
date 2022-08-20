@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GraphEdge, GraphNode } from "../../models/graph";
-import "./Edge.styles.css";
+import s from "./Edge.module.css";
 
 interface IProps {
     edge: GraphEdge;
@@ -29,7 +29,7 @@ const Edge: React.FC<IProps> = ({ edge: { fromId, toId }, graphLayout }) => {
     }, [graphLayout]);
 
     return fromGraphNodeRect && toGraphNodeRect ? (
-        <svg className="edge">
+        <svg className={s.edge}>
             <defs>
                 <marker
                     id="arrowhead"

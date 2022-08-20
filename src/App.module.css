@@ -1,4 +1,8 @@
-.app__content-wrapper {
+.app {
+    background-color: var(--color-background-global);
+}
+
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;

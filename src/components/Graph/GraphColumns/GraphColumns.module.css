@@ -1,14 +1,14 @@
-.graph__columns {
+.graph_columns {
     display: flex;
 }
 
-.graph__columns-item {
+.graph_columns_item {
     margin-right: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.graph__columns-item:last-child {
+.graph_columns_item:last-child {
     margin-right: 0;
 }

@@ -1,6 +1,6 @@
 import NodesList from "../../../containers/NodesList/NodesList";
 import { GraphNode } from "../../../models/graph";
-import "./GraphColumns.styles.css";
+import s from "./GraphColumns.module.css";
 
 interface IProps {
     graphLayout: GraphNode[][];
@@ -8,9 +8,9 @@ interface IProps {
 
 const GraphColumns: React.FC<IProps> = ({ graphLayout }) => {
     return (
-        <div className="graph__columns">
+        <div className={s.graph_columns}>
             {graphLayout.map((columnNodes) => (
-                <div className="graph__columns-item">
+                <div className={s.graph_columns_item}>
                     <NodesList nodes={columnNodes} />
                 </div>
             ))}

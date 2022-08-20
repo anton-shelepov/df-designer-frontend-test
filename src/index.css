@@ -4,7 +4,6 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-background-global);
   color: var(--color-text-primary);
 }
 
@@ -32,5 +31,5 @@ body {
   --global-wrapper: 1200px;
 
   /* Shadows */
-  --box-shadow-primary: 0px 0px 31px 0px var(--box-shadow-primary);
+  --box-shadow-primary: 0px 0px 31px 0px rgba(34, 60, 80, 0.04);
 }

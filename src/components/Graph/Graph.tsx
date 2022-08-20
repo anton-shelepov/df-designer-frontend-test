@@ -3,7 +3,7 @@ import NodesList from "../../containers/NodesList/NodesList";
 import IGraph from "../../models/graph";
 import useGraphLayout from "../../utils/hooks/useGraphLayout";
 import GraphColumns from "./GraphColumns/GraphColumns";
-import "./Graph.styles.css";
+import s from "./Graph.module.css";
 
 interface IProps {
     graph: IGraph;
@@ -12,7 +12,7 @@ interface IProps {
 const Graph: React.FC<IProps> = ({ graph: { edges, nodes } }) => {
     const [graphLayout, setGraphLayout] = useGraphLayout({ edges, nodes });
     return (
-        <div className="graph">
+        <div className={s.graph}>
             <GraphColumns graphLayout={graphLayout} />
             <EdgesList edges={edges} graphLayout={graphLayout} />
         </div>

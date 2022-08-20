@@ -1,5 +1,5 @@
 import { GraphNode } from "../../models/graph";
-import "./Node.styles.css";
+import s from "./Node.module.css";
 
 interface IProps {
     node: GraphNode;
@@ -7,8 +7,8 @@ interface IProps {
 
 const Node: React.FC<IProps> = ({ node }) => {
     return (
-        <div className="node" id={`node${node.id}`}>
-            <span className="node__title">{node.name}</span>
+        <div className={s.node} id={`node${node.id}`}>
+            <span className={s.title}>{node.name}</span>
         </div>
     );
 };

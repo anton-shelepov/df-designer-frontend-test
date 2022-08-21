@@ -13,7 +13,6 @@ const Dropdown: React.FC<IProps> = ({ options, onChange }) => {
         setSelectedOption(value);
         onChange(value);
     };
-    console.log(selectedOption);
     return (
         <select className={s.dropdown} value={selectedOption} onChange={onHandleChange}>
             {options.map((optionValue) => (

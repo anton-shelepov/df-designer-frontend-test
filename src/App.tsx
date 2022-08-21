@@ -7,7 +7,7 @@ function App() {
     const [selectedGraph, onGraphSelect] = useGraph();
     return (
         <div className={s.app}>
-            <Header onGraphSelect={onGraphSelect} />
+            <Header onSelect={onGraphSelect} />
             <main className={s.content}>
                 {selectedGraph.nodes.length === 0 ? (
                     <p>Please choose graph</p>

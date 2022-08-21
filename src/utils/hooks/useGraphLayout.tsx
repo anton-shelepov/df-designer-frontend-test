@@ -16,6 +16,8 @@ const useGraphLayout = ({
     useEffect(() => {
         setGraphLayout(computeGraphLayout(nodes, edges));
     }, [nodes, edges]);
+    // @ts-ignore
+    window.graph = graphLayout;
 
     return [graphLayout, setGraphLayout];
 };

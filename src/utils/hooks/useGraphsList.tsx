@@ -6,7 +6,10 @@ const useGraphsList = (): GraphsList => {
     const [graphsList, setGraphsList] = useState<GraphsList>({ graphs: [] });
 
     useEffect(() => {
-        fetchGraphsList().then((graphs) => setGraphsList({ graphs }));
+        fetchGraphsList().then((graphs) => {
+            console.log(graphs);
+            setGraphsList({ graphs });
+        });
     }, []);
 
     return graphsList;

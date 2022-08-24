@@ -7,7 +7,6 @@ const useGraphsList = (): GraphsList => {
 
     useEffect(() => {
         fetchGraphsList().then((graphs) => {
-            console.log(graphs);
             setGraphsList({ graphs });
         });
     }, []);

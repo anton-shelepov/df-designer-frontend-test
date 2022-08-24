@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GraphEdge, GraphNode } from "../../models/graph";
 import computeGraphLayout from "../scripts/computeGraphLayout";
 
@@ -10,16 +10,18 @@ interface IProps {
 const useGraphLayout = ({
     edges,
     nodes,
-}: IProps): [GraphNode[][], Dispatch<SetStateAction<GraphNode[][]>>] => {
-    const [graphLayout, setGraphLayout] = useState<GraphNode[][]>([[]]);
+}: IProps): [GraphNode[][], (newGraphLayout: GraphNode[][]) => void] => {
+    const [graphLayout, setGraphLayout] = useState<GraphNode[][]>(computeGraphLayout(nodes, edges));
+
+    const changeGraphLayout = (newGraphLayout: GraphNode[][]) => {
+        setGraphLayout(newGraphLayout);
+    };
 
     useEffect(() => {
-        setGraphLayout(computeGraphLayout(nodes, edges));
+        changeGraphLayout(computeGraphLayout(nodes, edges));
     }, [nodes, edges]);
-    // @ts-ignore
-    window.graph = graphLayout;
 
-    return [graphLayout, setGraphLayout];
+    return [graphLayout, changeGraphLayout];
 };
 
 export default useGraphLayout;

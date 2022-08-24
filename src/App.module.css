@@ -7,3 +7,9 @@
     padding: var(--safe-padding);
     margin: 0 auto;
 }
+
+.not_choosed {
+    margin-top: 25px;
+    font-size: 18px;
+    color: gray;
+}

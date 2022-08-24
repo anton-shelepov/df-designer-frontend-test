@@ -1,19 +1,19 @@
-import EdgesList from "../../containers/EdgesList/EdgesList";
-import NodesList from "../../containers/NodesList/NodesList";
+import EdgesList from "../../containers/EdgesList";
 import IGraph from "../../models/graph";
 import useGraphLayout from "../../utils/hooks/useGraphLayout";
-import GraphColumns from "./GraphColumns/GraphColumns";
 import s from "./Graph.module.css";
+import GraphColumns from "./GraphColumns/GraphColumns";
 
 interface IProps {
     graph: IGraph;
 }
 
 const Graph: React.FC<IProps> = ({ graph: { edges, nodes } }) => {
-    const [graphLayout, setGraphLayout] = useGraphLayout({ edges, nodes });
+    const [graphLayout, changeGraphLayout] = useGraphLayout({ edges, nodes });
+    console.log(graphLayout);
     return (
         <div className={s.graph}>
-            <GraphColumns graphLayout={graphLayout} />
+            <GraphColumns graphLayout={graphLayout} changeGraphLayout={changeGraphLayout} />
             <EdgesList edges={edges} graphLayout={graphLayout} />
         </div>
     );

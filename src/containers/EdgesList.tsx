@@ -1,5 +1,5 @@
-import Edge from "../../components/Edge/Edge";
-import IGraph, { GraphEdge, GraphNode } from "../../models/graph";
+import { Edge } from "../components";
+import { GraphEdge, GraphNode } from "../models/graph";
 
 interface IProps {
     edges: GraphEdge[];

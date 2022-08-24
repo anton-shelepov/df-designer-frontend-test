@@ -1,6 +1,5 @@
 import s from "./App.module.css";
-import Graph from "./components/Graph/Graph";
-import Header from "./components/Header/Header";
+import { Graph, Header } from "./components";
 import useGraph from "./utils/hooks/useGraph";
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
             <Header onSelect={onGraphSelect} />
             <main className={s.content}>
                 {selectedGraph.nodes.length === 0 ? (
-                    <p>Please choose graph</p>
+                    <p className={s.not_choosed}>Please choose graph</p>
                 ) : (
                     <Graph graph={selectedGraph} />
                 )}

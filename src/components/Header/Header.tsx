@@ -1,6 +1,6 @@
+import { Dropdown } from "../";
 import logo from "../../assets/images/logo.png";
 import useGraphsList from "../../utils/hooks/useGraphsList";
-import Dropdown from "../Dropdown/Dropdown";
 import s from "./Header.module.css";
 
 interface IProps {

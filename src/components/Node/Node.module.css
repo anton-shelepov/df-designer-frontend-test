@@ -1,11 +1,9 @@
 .node {
     padding: 15px 35px;
-    margin-bottom: 50px;
     border-top: 4px solid var(--color-blue);
     background-color: var(--color-background-primary);
     border-radius: 5px;
     text-align: center;
-
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari/Opera */
     -khtml-user-select: none; /* Konqueror */

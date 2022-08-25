@@ -15,6 +15,9 @@ const Dropdown: React.FC<IProps> = ({ options, onChange }) => {
     };
     return (
         <select className={s.dropdown} value={selectedOption} onChange={onHandleChange}>
+            <option value="" role="placeholder" disabled>
+                Select graph
+            </option>
             {options.map((optionValue) => (
                 <option key={optionValue} value={optionValue}>
                     {optionValue}

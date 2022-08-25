@@ -13,20 +13,29 @@ const computeGraphLayout = (nodes: GraphNode[], edges: GraphEdge[]) => {
                     : [currentNode];
             }
         };
+
+        const checkNodeForExistingInLayout = (edge: GraphEdge, nodeType: "parent" | "child") => {
+            return graphColumns
+                .flat()
+                .find((node) => node.id === (nodeType === "parent" ? edge.fromId : edge.toId));
+        };
+
         for (let currentEdge of edges) {
             const parentNodeFromPreviousColumn = graphColumns[currentColumn - 1]?.find(
                 (node) => node.id === currentEdge.fromId
             );
-            if (
-                edges.find((edge) => edge.toId === currentEdge.fromId) === undefined &&
-                !graphColumns.flat().find((node) => node.id === currentEdge.fromId)
-            ) {
+
+            const isOnlyOutgoing =
+                edges.find((edge) => edge.toId === currentEdge.fromId) === undefined;
+
+            const isConnectedWithPrevious = edges.find(
+                (edge) => edge.fromId === parentNodeFromPreviousColumn?.id
+            )?.toId;
+
+            if (isOnlyOutgoing && !checkNodeForExistingInLayout(currentEdge, "parent")) {
                 addNodeIntoGraphColumn(currentEdge, "from");
             }
-            if (
-                edges.find((edge) => edge.fromId === parentNodeFromPreviousColumn?.id)?.toId &&
-                !graphColumns.flat().find((node) => node.id === currentEdge.toId)
-            ) {
+            if (isConnectedWithPrevious && !checkNodeForExistingInLayout(currentEdge, "child")) {
                 addNodeIntoGraphColumn(currentEdge, "to");
             }
         }

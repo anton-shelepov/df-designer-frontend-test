@@ -11,7 +11,7 @@ const useGraphLayout = ({
     edges,
     nodes,
 }: IProps): [GraphNode[][], (newGraphLayout: GraphNode[][]) => void] => {
-    const [graphLayout, setGraphLayout] = useState<GraphNode[][]>(computeGraphLayout(nodes, edges));
+    const [graphLayout, setGraphLayout] = useState<GraphNode[][]>([]);
 
     const changeGraphLayout = (newGraphLayout: GraphNode[][]) => {
         setGraphLayout(newGraphLayout);

@@ -1,4 +1,6 @@
-import { LegacyRef, MouseEventHandler, useCallback, useContext, useRef } from "react";
+import { LegacyRef, MouseEventHandler, useCallback, useContext, useEffect, useRef } from "react";
+import cssTranslateXYProp from "../../../utils/scripts/cssTranslateXYProp";
+import swapElementsInArray from "../../../utils/scripts/swapElementsInArray";
 import { DNDContext } from "../DragAndDropContext";
 import s from "./Draggable.module.css";
 
@@ -23,50 +25,69 @@ const Draggable: React.FC<IProps> = ({ children, draggableIndex, draggableListIt
         droppableIndex,
     } = useContext(DNDContext);
 
-    const cssTranslateXYProp = (x: number, y: number) => {
-        return `translate(${x}px, ${y}px)`;
-    };
+    useEffect(() => {
+        draggableElementRef.current!.style.transform = cssTranslateXYProp(0, 0);
+    }, [currentDraggingIndex, draggableList]);
 
     const onHandleMouseMove = useCallback((e) => {
         const shiftByX = mouseDownOnElementRect.current!.left - mouseDownOnElementClient.current.x;
         const shiftByY = mouseDownOnElementRect.current!.top - mouseDownOnElementClient.current.y;
+        console.log(draggableElementRef.current);
         draggableElementRef.current!.style.transform = cssTranslateXYProp(
             e.pageX - draggableElementRef.current!.offsetLeft + shiftByX,
             e.pageY - draggableElementRef.current!.offsetTop + shiftByY
         );
     }, []);
 
-    const onHandleMouseUp = useCallback((e) => {
+    const onHandleMouseUp = useCallback(() => {
+        const removeDraggingStyles = () => {
+            draggableElementRef.current!.classList.remove(s.dragging);
+            draggableElementRef.current!.style.transform = "none";
+            document.body.style.cursor = "default";
+        };
+        const removeDraggingListeners = () => {
+            window.removeEventListener("mousemove", onHandleMouseMove);
+            window.removeEventListener("mouseup", onHandleMouseUp);
+        };
+
         updateCurrentDraggingIndex(-1);
-        draggableElementRef.current!.classList.remove(s.dragging);
-        draggableElementRef.current!.style.transform = "none";
-        document.body.style.cursor = "default";
-        window.removeEventListener("mousemove", onHandleMouseMove);
+        removeDraggingListeners();
+        removeDraggingStyles();
     }, []);
 
     const onHandleMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
-        updateCurrentDraggingIndex(draggableIndex);
-        draggableElementRef.current!.classList.add(s.dragging);
-        document.body.style.cursor = "grabbing";
-        mouseDownOnElementClient.current = {
-            x: e.clientX,
-            y: e.clientY,
+        const addDraggingStyles = () => {
+            draggableElementRef.current!.classList.add(s.dragging);
+            document.body.style.cursor = "grabbing";
         };
-        mouseDownOnElementRect.current = draggableElementRef.current!.getBoundingClientRect();
-        window.addEventListener("mousemove", onHandleMouseMove);
-        window.addEventListener("mouseup", onHandleMouseUp);
+        const addDraggableListeners = () => {
+            window.addEventListener("mousemove", onHandleMouseMove);
+            window.addEventListener("mouseup", onHandleMouseUp);
+        };
+        const updateMouseDownPosition = () => {
+            mouseDownOnElementClient.current = {
+                x: e.clientX,
+                y: e.clientY,
+            };
+            mouseDownOnElementRect.current = draggableElementRef.current!.getBoundingClientRect();
+        };
+
+        updateCurrentDraggingIndex(draggableIndex);
+        updateMouseDownPosition();
+        addDraggableListeners();
+        addDraggingStyles();
     };
 
     const onHandleMouseEnter: MouseEventHandler<HTMLDivElement> = (e) => {
         if (currentDraggingIndex !== -1) {
             const enteredElementIndex = draggableList.indexOf(draggableListItem);
-            const draggableListCopy = draggableList;
-            const temp = draggableListCopy[enteredElementIndex];
-            draggableListCopy[enteredElementIndex] = draggableListCopy[currentDraggingIndex];
-            draggableListCopy[currentDraggingIndex] = temp;
-
             updateCurrentDraggingIndex(enteredElementIndex);
-            onReorder(draggableListCopy as [], droppableIndex);
+            const reorderedDraggableList = swapElementsInArray(
+                draggableList,
+                enteredElementIndex,
+                currentDraggingIndex
+            );
+            onReorder(reorderedDraggableList, droppableIndex);
         }
     };
 

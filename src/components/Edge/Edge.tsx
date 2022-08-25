@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import { GraphEdge, GraphNode } from "../../models/graph";
+import useEdgePosition from "../../utils/hooks/useEdgePosition";
 import s from "./Edge.module.css";
 
 interface IProps {
@@ -7,59 +7,12 @@ interface IProps {
     graphLayout: GraphNode[][];
 }
 
-type EdgePosition = {
-    fromRect: DOMRect | undefined;
-    toRect: DOMRect | undefined;
-};
-
 const Edge: React.FC<IProps> = ({ edge: { fromId, toId }, graphLayout }) => {
-    const [edgePosition, setEdgePosition] = useState<EdgePosition>();
-
-    const connectedNodes = useRef({
-        fromNode: document.getElementById(`node${fromId}`),
-        toNode: document.getElementById(`node${toId}`),
+    const edgePosition = useEdgePosition({
+        fromNodeId: fromId,
+        toNodeId: toId,
+        graphLayout,
     });
-
-    const updateEdgePosition = () => {
-        setEdgePosition({
-            fromRect: connectedNodes.current.fromNode?.getBoundingClientRect(),
-            toRect: connectedNodes.current.toNode?.getBoundingClientRect(),
-        });
-    };
-
-    useEffect(() => {
-        connectedNodes.current = {
-            fromNode: document.getElementById(`node${fromId}`),
-            toNode: document.getElementById(`node${toId}`),
-        };
-
-        const updateWindowResizeListener = () => {
-            window.removeEventListener("resize", updateEdgePosition);
-            window.addEventListener("resize", updateEdgePosition);
-        };
-
-        const observer = new MutationObserver(function (mutations) {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === "style") {
-                    updateEdgePosition();
-                }
-            });
-        });
-
-        if (connectedNodes.current.fromNode && connectedNodes.current.toNode) {
-            observer.observe(connectedNodes.current.fromNode, {
-                attributes: true,
-            });
-            observer.observe(connectedNodes.current.toNode, {
-                attributes: true,
-            });
-        }
-
-        updateEdgePosition();
-        updateWindowResizeListener();
-
-        return () => window.removeEventListener("resize", updateEdgePosition);
-    }, [graphLayout]);
 
     return edgePosition?.fromRect && edgePosition.toRect ? (
         <svg className={s.edge}>

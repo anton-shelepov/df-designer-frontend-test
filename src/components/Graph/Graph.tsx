@@ -10,7 +10,6 @@ interface IProps {
 
 const Graph: React.FC<IProps> = ({ graph: { edges, nodes } }) => {
     const [graphLayout, changeGraphLayout] = useGraphLayout({ edges, nodes });
-    console.log(graphLayout);
     return (
         <div className={s.graph}>
             <GraphColumns graphLayout={graphLayout} changeGraphLayout={changeGraphLayout} />

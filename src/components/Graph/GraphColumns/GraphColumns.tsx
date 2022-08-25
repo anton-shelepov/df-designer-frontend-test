@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import { Draggable, Droppable, Node } from "../../";
 import { GraphNode } from "../../../models/graph";
 import DragAndDropContext from "../../DragAndDrop/DragAndDropContext";
@@ -10,15 +9,13 @@ interface IProps {
 }
 
 const GraphColumns: React.FC<IProps> = ({ graphLayout, changeGraphLayout }) => {
-    const onHandleMouseOver: MouseEventHandler<HTMLDivElement> = (e) => {};
     const onGraphLayoutReorder = (reorderedColumn: GraphNode[], reorderedColumnIndex: number) => {
-        for (let graphColumn of graphLayout) {
+        for (let _ of graphLayout) {
             const changedGraphLayout = graphLayout.map((graphColumn, index) =>
                 index === reorderedColumnIndex ? reorderedColumn : graphColumn
             );
             changeGraphLayout(changedGraphLayout);
         }
-        console.log(reorderedColumn);
     };
     return (
         <div className={s.graph_columns}>

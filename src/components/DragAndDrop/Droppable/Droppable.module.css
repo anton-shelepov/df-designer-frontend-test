@@ -1,10 +1,10 @@
 .droppable {
-    padding: 35px;
-    border: 3px transparent dashed;
+    padding: 45px;
+    border: 2px transparent dashed;
     border-radius: 25px;
     transition: border 0.1s;
 }
 
 .dragging {
-    border: 3px rgba(0, 110, 255, 0.116) dashed;
+    border: 2px rgba(0, 110, 255, 0.158) dashed;
 }

@@ -1,6 +1,20 @@
 .dropdown {
-    padding: 5px;
+    padding: 5px 7px;
     border-radius: 3px;
     min-width: 100px;
-    border: 1px solid rgb(214, 214, 214);
+    border: 1px solid var(--color-blue);
+    outline-color: var(--color-blue);
+    color: var(--color-blue);
+    font-size: 15px;
+    background-color: #2282ff02;
+}
+
+option:disabled {
+    color: #2282ff91;
+    font-size: 16px;
+}
+
+option {
+    padding: 15px;
+    border: 1px solid red;
 }

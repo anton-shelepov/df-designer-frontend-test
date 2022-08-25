@@ -32,7 +32,6 @@ const Draggable: React.FC<IProps> = ({ children, draggableIndex, draggableListIt
     const onHandleMouseMove = useCallback((e) => {
         const shiftByX = mouseDownOnElementRect.current!.left - mouseDownOnElementClient.current.x;
         const shiftByY = mouseDownOnElementRect.current!.top - mouseDownOnElementClient.current.y;
-        console.log(draggableElementRef.current);
         draggableElementRef.current!.style.transform = cssTranslateXYProp(
             e.pageX - draggableElementRef.current!.offsetLeft + shiftByX,
             e.pageY - draggableElementRef.current!.offsetTop + shiftByY
